@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            
+            $table->unsignedBigInteger('event_id')->unsigned();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+
+            $table->enum('type', ['VIP', 'Regular']); // Type field for ticket type (VIP or Regular)
+            
+            $table->integer('created_at')->nullable();
+            $table->integer('updated_at')->nullable();
+            $table->integer('deleted_at')->nullable();
         });
     }
 
