@@ -148,6 +148,15 @@ class EventController extends Controller
         }
     }
 
+    // Get list of attendees for an event
+    public function attendees($eventid){
+        try {
+            
+        } catch (\Throwable $th) {
+            
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */

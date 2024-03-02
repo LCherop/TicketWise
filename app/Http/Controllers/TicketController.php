@@ -36,38 +36,41 @@ class TicketController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         try {
-            // 'event_id','user_id','type',
+           
             $fields = $request->validate([
                 'event_id' => 'required',
                 'user_id' => 'required',
-                'type' => 'required',
+                'type' => 'required|in:VIP,Regular',
+                'quantity' => 'required|numeric|min:1|max:5'
             ]);
+            
 
-            $ticket = Ticket::create([
+            // Ensure user does not buy more than 5 tickets:
+            $userTicketCount = Ticket::where('user_id',$fields['user_id']);
+            
+            if($userTicketCount >= 5){
+                return response()->json(['message' => 'You can only buy upto 5 tickets'], 422);
+    
+            }else{
+                $ticket = Ticket::create([
                     'event_id' => $fields['event_id'],
                     'user_id' => $fields['user_id'],
                     'type' => $fields['type'],
                 ]);
                 
-            $response = [
-                'ticket' => $ticket,
-                'message' => 'Ticket added successfully'
-            ];
-        
-            return response()->json($response, 200);
+                $response = [
+                    'ticket' => $ticket,
+                    'message' => 'Ticket bought successfully'
+                ];
+            
+                return response()->json($response, 200);
+            }
+            
         } catch (\Throwable $th) {
             
             $response = [

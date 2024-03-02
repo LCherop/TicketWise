@@ -22,6 +22,7 @@ return new class extends Migration
             
 
             $table->enum('type', ['VIP', 'Regular']); // Type field for ticket type (VIP or Regular)
+            $table->integer('quantity');
             
             $table->integer('created_at')->nullable();
             $table->integer('updated_at')->nullable();
