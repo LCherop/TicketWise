@@ -55,4 +55,4 @@ Contributions to TicketWise are welcome! Here are some guidelines to follow:
  - Submit a pull request detailing the changes you've made.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
