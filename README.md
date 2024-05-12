@@ -11,7 +11,7 @@ TicketWise allows users to book tickets for various events. Administrators can m
 ### Prerequisites
 
 - Python 3.x
-- Node.js
+- Javascript
 - MySQL
 
 ### Installation
